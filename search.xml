@@ -20,9 +20,11 @@
       
         <tags>
             
-            <tag> Information Gathering - Enumeration </tag>
+            <tag> Information Gathering </tag>
             
             <tag> Post-Exploitation </tag>
+            
+            <tag> Enumeration </tag>
             
         </tags>
       
