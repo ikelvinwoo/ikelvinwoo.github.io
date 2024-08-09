@@ -15,12 +15,18 @@
           
           <category> Cybersecurity </category>
           
+          <category> Penetration Testing </category>
+          
+          <category> Information Gathering </category>
+          
       </categories>
       
       
         <tags>
             
-            <tag> Information Gathering </tag>
+            <tag> Virtual Hosts </tag>
+            
+            <tag> Subdomains </tag>
             
         </tags>
       
@@ -38,7 +44,7 @@
       
       <categories>
           
-          <category> DevSecOps </category>
+          <category> DevOps </category>
           
       </categories>
       
