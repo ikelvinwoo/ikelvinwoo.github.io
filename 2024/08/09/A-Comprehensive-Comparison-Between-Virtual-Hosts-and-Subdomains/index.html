@@ -1,207 +1,46 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>A Comprehensive Comparison Between Virtual Hosts and Subdomains | WuDiaries</title><meta name="author" content="Qingyun Wu"><meta name="copyright" content="Qingyun Wu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
-<meta property="og:title" content="A Comprehensive Comparison Between Virtual Hosts and Subdomains">
-<meta property="og:url" content="https://wudiaries.com/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/">
-<meta property="og:site_name" content="WuDiaries">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809093620-Hn30Ha.jpeg">
-<meta property="article:published_time" content="2024-08-09T01:22:50.000Z">
-<meta property="article:modified_time" content="2024-08-09T01:22:50.000Z">
-<meta property="article:author" content="Qingyun Wu">
-<meta property="article:tag" content="Virtual Hosts">
-<meta property="article:tag" content="Subdomains">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809093620-Hn30Ha.jpeg"><link rel="shortcut icon" href="/statics/images/favicon.png"><link rel="canonical" href="https://wudiaries.com/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
-  translate: undefined,
-  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
-  copy: {
-    success: 'Copy Successful',
-    error: 'Copy Error',
-    noSupport: 'Browser Not Supported'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: 'days',
-  dateSuffix: {
-    just: 'Just now',
-    min: 'minutes ago',
-    hour: 'hours ago',
-    day: 'days ago',
-    month: 'months ago'
-  },
-  copyright: {"limitCount":50,"languages":{"author":"Author: Qingyun Wu","link":"Link: ","source":"Source: WuDiaries","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
-    buttonText: 'Load More'
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: true,
-  percent: {
-    toc: true,
-    rightside: true,
-  },
-  autoDarkmode: true
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'A Comprehensive Comparison Between Virtual Hosts and Subdomains',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: true,
-  postUpdate: '08-09-2024 09:22:50'
-}</script><script>(win=>{
-      win.saveToLocal = {
-        set: (key, value, ttl) => {
-          if (ttl === 0) return
-          const now = Date.now()
-          const expiry = now + ttl * 86400000
-          const item = {
-            value,
-            expiry
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>A Comprehensive Comparison Between Virtual Hosts and Subdomains - WuDiaries</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="WuDiaries"><meta name="msapplication-TileImage" content="/statics/images/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="WuDiaries"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="这篇文章对虚拟主机（Virtual Hosts）和子域名（Subdomains）进行了全面的比较。详细分析了两者在Web托管中的应用、优缺点及适用场景，讨论了它们在配置、SEO、管理和安全性等方面的差异。虚拟主机通常用于在同一个服务器上托管多个网站，而子域名则是通过域名层级划分来管理不同的站点。还探讨了如何根据具体需求选择合适的方案，以优化性能和管理效率。"><meta property="og:type" content="blog"><meta property="og:title" content="A Comprehensive Comparison Between Virtual Hosts and Subdomains"><meta property="og:url" content="https://wudiaries.com/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/"><meta property="og:site_name" content="WuDiaries"><meta property="og:description" content="这篇文章对虚拟主机（Virtual Hosts）和子域名（Subdomains）进行了全面的比较。详细分析了两者在Web托管中的应用、优缺点及适用场景，讨论了它们在配置、SEO、管理和安全性等方面的差异。虚拟主机通常用于在同一个服务器上托管多个网站，而子域名则是通过域名层级划分来管理不同的站点。还探讨了如何根据具体需求选择合适的方案，以优化性能和管理效率。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://wudiaries.com/statics/images/post-covers/coding.jpeg"><meta property="article:published_time" content="2024-08-09T01:22:50.000Z"><meta property="article:modified_time" content="2024-08-09T01:22:50.000Z"><meta property="article:author" content="Qingyun Wu"><meta property="article:tag" content="信息收集"><meta property="article:tag" content="虚拟主机"><meta property="article:tag" content="子域名"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://wudiaries.com/statics/images/post-covers/coding.jpeg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://wudiaries.com/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/"},"headline":"A Comprehensive Comparison Between Virtual Hosts and Subdomains","image":[],"datePublished":"2024-08-09T01:22:50.000Z","dateModified":"2024-08-09T01:22:50.000Z","author":{"@type":"Person","name":"Qingyun Wu"},"publisher":{"@type":"Organization","name":"WuDiaries","logo":{"@type":"ImageObject"}},"description":"这篇文章对虚拟主机（Virtual Hosts）和子域名（Subdomains）进行了全面的比较。详细分析了两者在Web托管中的应用、优缺点及适用场景，讨论了它们在配置、SEO、管理和安全性等方面的差异。虚拟主机通常用于在同一个服务器上托管多个网站，而子域名则是通过域名层级划分来管理不同的站点。还探讨了如何根据具体需求选择合适的方案，以优化性能和管理效率。"}</script><link rel="canonical" href="https://wudiaries.com/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/"><link rel="icon" href="/statics/images/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600&amp;family=Roboto+Mono"><link data-pjax rel="stylesheet" href="/css/cyberpunk.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
           }
-          localStorage.setItem(key, JSON.stringify(item))
-        },
-      
-        get: key => {
-          const itemStr = localStorage.getItem(key)
-      
-          if (!itemStr) {
-            return undefined
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
           }
-          const item = JSON.parse(itemStr)
-          const now = Date.now()
-      
-          if (now > item.expiry) {
-            localStorage.removeItem(key)
-            return undefined
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
           }
-          return item.value
-        }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
       }
-    
-      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        script.onerror = reject
-        script.onload = script.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          script.onload = script.onreadystatechange = null
-          resolve()
-        }
-
-        Object.keys(attr).forEach(key => {
-          script.setAttribute(key, attr[key])
-        })
-
-        document.head.appendChild(script)
-      })
-    
-      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onerror = reject
-        link.onload = link.onreadystatechange = function() {
-          const loadState = this.readyState
-          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-          link.onload = link.onreadystatechange = null
-          resolve()
-        }
-        document.head.appendChild(link)
-      })
-    
-      win.activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-
-          if (t === undefined) {
-            if (isLightMode) activateLightMode()
-            else if (isDarkMode) activateDarkMode()
-            else if (isNotSpecified || hasNoSupport) {
-              const now = new Date()
-              const hour = now.getHours()
-              const isNight = hour <= 6 || hour >= 18
-              isNight ? activateDarkMode() : activateLightMode()
-            }
-            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
-              if (saveToLocal.get('theme') === undefined) {
-                e.matches ? activateDarkMode() : activateLightMode()
-              }
-            })
-          } else if (t === 'light') activateLightMode()
-          else activateDarkMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-      const detectApple = () => {
-        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-          document.documentElement.classList.add('apple')
-        }
-      }
-      detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
-  const $loadingBox = document.getElementById('loading-box')
-  const $body = document.body
-  const preloader = {
-    endLoading: () => {
-      $body.style.overflow = ''
-      $loadingBox.classList.add('loaded')
-    },
-    initLoading: () => {
-      $body.style.overflow = 'hidden'
-      $loadingBox.classList.remove('loaded')
-    }
-  }
-
-  preloader.initLoading()
-  window.addEventListener('load',() => { preloader.endLoading() })
-
-  if (false) {
-    document.addEventListener('pjax:send', () => { preloader.initLoading() })
-    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-  }
-})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/statics/images/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809093620-Hn30Ha.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="WuDiaries"><span class="site-name">WuDiaries</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">A Comprehensive Comparison Between Virtual Hosts and Subdomains</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-08-09T01:22:50.000Z" title="Created 08-09-2024 09:22:50">08-09-2024</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-08-09T01:22:50.000Z" title="Updated 08-09-2024 09:22:50">08-09-2024</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Cybersecurity/">Cybersecurity</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Cybersecurity/Penetration-Testing/">Penetration Testing</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Cybersecurity/Penetration-Testing/Information-Gathering/">Information Gathering</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>7mins</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="A Comprehensive Comparison Between Virtual Hosts and Subdomains"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Virtual-Hosts"><a href="#Virtual-Hosts" class="headerlink" title="Virtual Hosts"></a>Virtual Hosts</h1><p>Virtual hosts are websites running on multiple domains on the same physical server, and these units are independent of each other. They can have their own separate domain names, IP addresses, and website content, but they share the same server and operating system, as shown below:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809093746-O0gDfl.png" alt="Architecture of Virtual Hosts"></p>
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="WuDiaries" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="WuDiaries" type="application/rss+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">WuDiaries</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">文章</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/statics/images/post-covers/coding.jpeg" alt="A Comprehensive Comparison Between Virtual Hosts and Subdomains"></span></div><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-08-09T01:22:50.000Z" title="2024/8/9 09:22:50">08-09-2024</time>发表</span><span class="level-item"><time dateTime="2024-08-09T01:22:50.000Z" title="2024/8/9 09:22:50">08-09-2024</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><span> / </span><a class="link-muted" href="/categories/%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/">Web安全</a><span> / </span><a class="link-muted" href="/categories/%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></span><span class="level-item">8 分钟读完 (大约1182个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">A Comprehensive Comparison Between Virtual Hosts and Subdomains</h1><div class="content"><h1 id="Virtual-Hosts"><a title="Virtual Hosts" class="headerlink" href="#Virtual-Hosts"></a>Virtual Hosts</h1><p>Virtual hosts are websites running on multiple domains on the same physical server, and these units are independent of each other. They can have their own separate domain names, IP addresses, and website content, but they share the same server and operating system, as shown below:</p>
+<p><img alt="Architecture of Virtual Hosts" src="https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809093746-O0gDfl.png"></p>
 <p>Web users can access a specific website by domain name, IP address, or port, as shown in the figure below:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809093810-h1WRnT.png" alt="Virtual Host Access Traffic Flows"></p>
+<p><img alt="Virtual Host Access Traffic Flows" src="https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809093810-h1WRnT.png"></p>
 <p><strong>Virtual hosts are typically used in the following scenarios:</strong></p>
 <ul>
 <li>Hosting multiple websites with different domain names on a single server;</li>
 <li>Saving server resources and costs.</li>
 </ul>
-<h2 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h2><p>There are 3 types of virtual hosts: 1) URL-based; 2) IP address-based; and 3) port-based, as shown in the table below:</p>
+<h2 id="Types"><a title="Types" class="headerlink" href="#Types"></a>Types</h2><p>There are 3 types of virtual hosts: 1) URL-based; 2) IP address-based; and 3) port-based, as shown in the table below:</p>
 <table>
 <thead>
 <tr>
@@ -215,19 +54,19 @@
 <td><strong>Depending on Host Header</strong></td>
 <td>Yes</td>
 <td>No</td>
-<td>Yes - URL Used<br />No - IP Addresses Used</td>
+<td>Yes - URL Used<br>No - IP Addresses Used</td>
 </tr>
 <tr>
 <td><strong>Multi IP Address Requirements</strong></td>
 <td>No</td>
 <td>Yes</td>
-<td>No - URL Used<br />Yes - IP Addresses Used</td>
+<td>No - URL Used<br>Yes - IP Addresses Used</td>
 </tr>
 <tr>
-<td><strong>SSL&#x2F;TLS Protocol Limitation</strong></td>
+<td><strong>SSL/TLS Protocol Limitation</strong></td>
 <td>Yes</td>
 <td>No</td>
-<td>Yes - URL Used<br />No - IP Addresses Used</td>
+<td>Yes - URL Used<br>No - IP Addresses Used</td>
 </tr>
 <tr>
 <td><strong>Efficiency</strong></td>
@@ -251,21 +90,21 @@
 <td><strong>Security</strong></td>
 <td>Medium</td>
 <td>High</td>
-<td>Medium - URL Used<br />High - IP Addresses Used</td>
+<td>Medium - URL Used<br>High - IP Addresses Used</td>
 </tr>
 </tbody></table>
-<h2 id="DNS-Resolution"><a href="#DNS-Resolution" class="headerlink" title="DNS Resolution"></a>DNS Resolution</h2><p>Virtual hosting is implemented at the configuration level of a web server and allows multiple websites to be hosted on a single server. In the DNS resolution process, each virtual host usually corresponds to one or more domain names, and the DNS server resolves these domain names to point to the server with the same IP address. After receiving a HTTP request, the web server decides which virtual host’s content and resources to respond to the user based on the Host header in the request packet.</p>
+<h2 id="DNS-Resolution"><a title="DNS Resolution" class="headerlink" href="#DNS-Resolution"></a>DNS Resolution</h2><p>Virtual hosting is implemented at the configuration level of a web server and allows multiple websites to be hosted on a single server. In the DNS resolution process, each virtual host usually corresponds to one or more domain names, and the DNS server resolves these domain names to point to the server with the same IP address. After receiving a HTTP request, the web server decides which virtual host’s content and resources to respond to the user based on the Host header in the request packet.</p>
 <p>However, public DNS usually cannot resolve some virtual hosts, mainly because public DNS does not have the correct A record, AAAA record, or CNAME record, and these virtual hosts share the same IP address and run on the same physical machine. In this case, the only way to distinguish between different websites is through the Host header information in the HTTP request. If you need to access these virtual hosts in a browser, one way to achieve this is to manually add DNS resolution records in the <code>/etc/host</code> file (Linux) or in the <code>C:\Windows\System32\drivers\etc\hosts</code> file (Windows).</p>
-<h2 id="Potential-Security-Concerns"><a href="#Potential-Security-Concerns" class="headerlink" title="Potential Security Concerns"></a>Potential Security Concerns</h2><p><strong>Misconfiguration</strong></p>
+<h2 id="Potential-Security-Concerns"><a title="Potential Security Concerns" class="headerlink" href="#Potential-Security-Concerns"></a>Potential Security Concerns</h2><p><strong>Misconfiguration</strong></p>
 <p>Misconfigured virtual hosts can cause websites with different domain names to leak each other’s sensitive information.</p>
 <p>As an example, let’s say there is a web server with a public IP of <code>1.1.1.1</code> and hosting two websites <code>example.com</code> and <code>a.example.com</code>. Failure to properly distinguish between the directories corresponding to the two domains may result in <code>a.example.com</code> being accessed with the contents of <code>example.com</code>, or <code>a.example.com</code> being accessed with the contents of <code>example.com</code>.</p>
 <p><strong>Access Control Concerns</strong></p>
 <p>There may be access controls that are not properly configured, allowing unauthorized access to the contents of the virtual host.</p>
 <p>In Apache, access control is usually configured 1) globally in the <code>httpd.conf</code> file, and 2) specifically in the configuration file corresponding to each virtual host (e.g., in the directory <code>/etc/apache2/sites-available</code>). The following are some of the settings in the virtual host configuration, where <code>Order</code>, <code>Allow</code>, <code>Deny</code>, etc. define the access control rules for the virtual host.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName example.com</span><br><span class="line">    DocumentRoot /var/www/example</span><br><span class="line">    &lt;Directory /var/www/example&gt;</span><br><span class="line">        Options Indexes FollowSymLinks</span><br><span class="line">        AllowOverride None</span><br><span class="line">        Order allow,deny</span><br><span class="line">        Allow from all</span><br><span class="line">    &lt;/Directory&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+
 
 <p>In Nginx, similar to Apache, global configuration can be configured in the <code>nginx.conf</code> file, and a separate virtual host configuration file is located in the <code>/etc/nginx/sites-available</code> directory. As follows, the <code>allow</code> parameter in the <code>location</code> block defines the access control rules for the virtual host.</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line">    <span class="attribute">root</span> /var/www/example;</span><br><span class="line">    </span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">allow</span> all;</span><br><span class="line">        <span class="comment"># Other directives</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
 <p>Therefore, the following considerations need to be taken into account in the access control definitions:</p>
 <ol>
@@ -273,26 +112,26 @@
 <li>Authentication mechanisms can be integrated into security controls if needed;</li>
 <li>Logging would need to be enabled to ensure that exceptions can be logged and regular log reviews are performed.</li>
 </ol>
-<h2 id="Virtual-Host-Enumeration"><a href="#Virtual-Host-Enumeration" class="headerlink" title="Virtual Host Enumeration"></a>Virtual Host Enumeration</h2><p>In general, URL-based virtual host is one of the most common practices, and we can use different tools for virtual host enumeration:</p>
+<h2 id="Virtual-Host-Enumeration"><a title="Virtual Host Enumeration" class="headerlink" href="#Virtual-Host-Enumeration"></a>Virtual Host Enumeration</h2><p>In general, URL-based virtual host is one of the most common practices, and we can use different tools for virtual host enumeration:</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/OJ/gobuster">Gobuster</a>: <code>gobuster vhost -u http(s)://&lt;TARGET&gt; -w &lt;WORDLIST_FILE&gt; --append-domain</code></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/ffuf/ffuf">Ffuf</a>: <code>ffuf -w &lt;WORDLIST_FILE&gt;:FUZZ -u http(s)://&lt;TARGET&gt; -H &#39;Host: FUZZ.&lt;TARGET&gt;&#39;</code></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ffuf/ffuf">Ffuf</a>: <code>ffuf -w &lt;WORDLIST_FILE&gt;:FUZZ -u http(s)://&lt;TARGET&gt; -H 'Host: FUZZ.&lt;TARGET&gt;'</code></li>
 <li><a target="_blank" rel="noopener" href="https://nmap.org/">Nmap</a>: <code>nmap -p &lt;PORT&gt; --script http-vhosts &lt;TARGET&gt;</code></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/sullo/nikto">Nikto</a>: <code>nikto -h &lt;TARGET_IP&gt; -p &lt;PORT&gt; -vhost &lt;TARGET_URL&gt;</code></li>
 </ul>
-<h1 id="Subdomains"><a href="#Subdomains" class="headerlink" title="Subdomains"></a>Subdomains</h1><p>After discussing virtual hosts, there is no mandatory requirement for subdomains to share the same server and operating system as virtual hosts do. Subdomains are subdivisions of the main domain name and are often used to distinguish between different services, departments, or geographic locations. Subdomains can be set up with DNS records (such as A records, AAAA records, or CNAME records), which can point to different IP addresses or different ports on the same IP address.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809094006-6qc00U.png" alt="Architecture of Subdomains"></p>
+<h1 id="Subdomains"><a title="Subdomains" class="headerlink" href="#Subdomains"></a>Subdomains</h1><p>After discussing virtual hosts, there is no mandatory requirement for subdomains to share the same server and operating system as virtual hosts do. Subdomains are subdivisions of the main domain name and are often used to distinguish between different services, departments, or geographic locations. Subdomains can be set up with DNS records (such as A records, AAAA records, or CNAME records), which can point to different IP addresses or different ports on the same IP address.</p>
+<p><img alt="Architecture of Subdomains" src="https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809094006-6qc00U.png"></p>
 <p><strong>Subdomains are typically used in the following scenarios:</strong></p>
 <ul>
 <li>Separating different services or departments under the main domain name;</li>
 <li>Providing different websites or services without the need for additional domain names.</li>
 </ul>
-<h2 id="DNS-Resolution-1"><a href="#DNS-Resolution-1" class="headerlink" title="DNS Resolution"></a>DNS Resolution</h2><p>A subdomain is a branch under the main domain name, which is usually used to separate different services, departments, or geographical locations under the main domain name. In public DNS, subdomains are usually available for resolution (i.e., A records, AAAA records, or CNAME records can be found.) In the DNS resolution process, the browser will find the corresponding IP address based on the DNS record, and then sends requests to that IP address.</p>
-<h2 id="Potential-Security-Concerns-1"><a href="#Potential-Security-Concerns-1" class="headerlink" title="Potential Security Concerns"></a>Potential Security Concerns</h2><ul>
+<h2 id="DNS-Resolution-1"><a title="DNS Resolution" class="headerlink" href="#DNS-Resolution-1"></a>DNS Resolution</h2><p>A subdomain is a branch under the main domain name, which is usually used to separate different services, departments, or geographical locations under the main domain name. In public DNS, subdomains are usually available for resolution (i.e., A records, AAAA records, or CNAME records can be found.) In the DNS resolution process, the browser will find the corresponding IP address based on the DNS record, and then sends requests to that IP address.</p>
+<h2 id="Potential-Security-Concerns-1"><a title="Potential Security Concerns" class="headerlink" href="#Potential-Security-Concerns-1"></a>Potential Security Concerns</h2><ul>
 <li><strong>Unauthorized Access</strong>: Some subdomains may not be properly protected, which may result in the disclosure of sensitive information or unauthorized access.</li>
 <li><strong>Subdomain Hijacking</strong>: If an attacker is able to tamper with DNS records or use DNS cache poisoning attacks, they are able to hijack subdomain traffic and perform malicious actions such as man-in-the-middle (MITM) attacks or stealing sensitive information.</li>
 </ul>
-<h2 id="Subdomain-Enumerations"><a href="#Subdomain-Enumerations" class="headerlink" title="Subdomain Enumerations"></a>Subdomain Enumerations</h2><p>There are different tools we can use to enumerate subdomains:</p>
+<h2 id="Subdomain-Enumerations"><a title="Subdomain Enumerations" class="headerlink" href="#Subdomain-Enumerations"></a>Subdomain Enumerations</h2><p>There are different tools we can use to enumerate subdomains:</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/fwaeytens/dnsenum">DNSEnum</a>: <code>dnsenum --enum &lt;TARGET&gt; -f &lt;WORDLIST_FILE&gt; -r</code></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/ffuf/ffuf">Ffuf</a>: <code>ffuf -w &lt;WORDLIST_FILE&gt;:FUZZ -u http(s)://FUZZ.&lt;TARGET&gt;</code></li>
@@ -301,23 +140,49 @@
 <li><a target="_blank" rel="noopener" href="https://github.com/darkoperator/dnsrecon">DNSRecon</a>: <code>dnsrecon -d &lt;TARGET&gt;</code></li>
 <li>DIG Zone Transfer: <code>dig axfr @&lt;NS_ADDRESS&gt; &lt;TARGET&gt;</code></li>
 </ul>
-<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>By learning about virtual hosts and subdomains, I have learnt that virtual hosts are a special type of subdomain. <strong>Virtual hosts</strong> require sharing the same server and operating system, and some domain names for virtual hosts are not resolvable in the public DNS. On the other hand, <strong>subdomains</strong> are able to get domain names resolved in public DNS easily.</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://wudiaries.com">Qingyun Wu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://wudiaries.com/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/">https://wudiaries.com/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Virtual-Hosts/">Virtual Hosts</a><a class="post-meta__tags" href="/tags/Subdomains/">Subdomains</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809093620-Hn30Ha.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/statics/images/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Qingyun Wu</div><div class="author-info__description">Think Like an Artist, Do Like an Artisan!</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ikelvinwoo"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/ikelvinwoo" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ikelvinwoo@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://wudiaries.medium.com" target="_blank" title="Medium"><i class="fa-brands fa-medium"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">俗人昭昭,我独昏昏；俗人察察,我独闷闷。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Virtual-Hosts"><span class="toc-number">1.</span> <span class="toc-text">Virtual Hosts</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Types"><span class="toc-number">1.1.</span> <span class="toc-text">Types</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-Resolution"><span class="toc-number">1.2.</span> <span class="toc-text">DNS Resolution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Potential-Security-Concerns"><span class="toc-number">1.3.</span> <span class="toc-text">Potential Security Concerns</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Virtual-Host-Enumeration"><span class="toc-number">1.4.</span> <span class="toc-text">Virtual Host Enumeration</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Subdomains"><span class="toc-number">2.</span> <span class="toc-text">Subdomains</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-Resolution-1"><span class="toc-number">2.1.</span> <span class="toc-text">DNS Resolution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Potential-Security-Concerns-1"><span class="toc-number">2.2.</span> <span class="toc-text">Potential Security Concerns</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Subdomain-Enumerations"><span class="toc-number">2.3.</span> <span class="toc-text">Subdomain Enumerations</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">3.</span> <span class="toc-text">Conclusion</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/" title="A Comprehensive Comparison Between Virtual Hosts and Subdomains"><img src="https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809093620-Hn30Ha.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="A Comprehensive Comparison Between Virtual Hosts and Subdomains"/></a><div class="content"><a class="title" href="/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/" title="A Comprehensive Comparison Between Virtual Hosts and Subdomains">A Comprehensive Comparison Between Virtual Hosts and Subdomains</a><time datetime="2024-08-09T01:22:50.000Z" title="Created 08-09-2024 09:22:50">08-09-2024</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/27/Implementing-Kubernetes-and-Docker-on-OCI/" title="Implementing Kubernetes and Docker on OCI"><img src="https://hcljapan.co.jp/software/blog/bl-content/uploads/pages/8d736f3963252b65f6c5b49336c4f217/Untitled-1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Implementing Kubernetes and Docker on OCI"/></a><div class="content"><a class="title" href="/2022/04/27/Implementing-Kubernetes-and-Docker-on-OCI/" title="Implementing Kubernetes and Docker on OCI">Implementing Kubernetes and Docker on OCI</a><time datetime="2022-04-27T02:34:37.000Z" title="Created 04-27-2022 10:34:37">04-27-2022</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/21/port-scanning/" title="Port Scanning"><img src="https://info.varonis.com/hubfs/Imported_Blog_Media/port-scan-hero.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Port Scanning"/></a><div class="content"><a class="title" href="/2021/08/21/port-scanning/" title="Port Scanning">Port Scanning</a><time datetime="2021-08-21T02:15:00.000Z" title="Created 08-21-2021 10:15:00">08-21-2021</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.jsdelivr.net/gh/ikelvinwoo/images@master/uPic/20240809093620-Hn30Ha.jpeg')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Qingyun Wu</div><div class="footer_custom_text">Think Like an Artist, Do Like an Artisan!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
-  if (typeof pangu === 'object') pangu.autoSpacingPage()
-  else {
-    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
-      .then(() => {
-        pangu.autoSpacingPage()
-      })
-  }
-}
-
-function panguInit () {
-  if (false){
-    GLOBAL_CONFIG_SITE.isPost && panguFn()
-  } else {
-    panguFn()
-  }
-}
-
-document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
+<h1 id="Conclusion"><a title="Conclusion" class="headerlink" href="#Conclusion"></a>Conclusion</h1><p>By learning about virtual hosts and subdomains, I have learnt that virtual hosts are a special type of subdomain. <strong>Virtual hosts</strong> require sharing the same server and operating system, and some domain names for virtual hosts are not resolvable in the public DNS. On the other hand, <strong>subdomains</strong> are able to get domain names resolved in public DNS easily.</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>A Comprehensive Comparison Between Virtual Hosts and Subdomains</p><p><a href="https://wudiaries.com/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/">https://wudiaries.com/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Qingyun Wu</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>08-09-2024</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>08-09-2024</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a><a class="link-muted mr-2" rel="tag" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/">虚拟主机</a><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/">子域名</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2025/02/08/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8BPOP%E9%93%BE%E5%AD%A6%E4%B9%A0-MRCTF2020-Ezpop/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">PHP反序列化之POP链学习 - MRCTF2020-Ezpop</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/04/27/Implementing-Kubernetes-and-Docker-on-OCI/"><span class="level-item">Implementing Kubernetes and Docker on OCI</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/statics/images/avatar.jpg" alt="Qingyun Wu"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Qingyun Wu</p><p class="is-size-6 is-block">Cybersecurity Learner</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Chaos Zone</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives/"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories/"><p class="title">7</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags/"><p class="title">12</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ikelvinwoo" target="_blank" rel="me noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/ikelvinwoo"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Email" href="mailto:ikelvinwoo@gmail.com"><i class="fas fa-envelope"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%AE%89%E5%85%A8/"><span class="level-start"><span class="level-item">安全</span></span><span class="level-end"><span class="level-item tag">3</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/"><span class="level-start"><span class="level-item">Web安全</span></span><span class="level-end"><span class="level-item tag">2</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/PHP/"><span class="level-start"><span class="level-item">PHP</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"><span class="level-start"><span class="level-item">信息收集</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E5%AE%89%E5%85%A8/%E4%B8%BB%E6%9C%BA%E5%AE%89%E5%85%A8/"><span class="level-start"><span class="level-item">主机安全</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E5%AE%89%E5%85%A8/%E4%B8%BB%E6%9C%BA%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"><span class="level-start"><span class="level-item">信息收集</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="/categories/%E8%BF%90%E7%BB%B4/"><span class="level-start"><span class="level-item">运维</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/2025/02/08/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8BPOP%E9%93%BE%E5%AD%A6%E4%B9%A0-MRCTF2020-Ezpop/"><img src="/statics/images/post-covers/ctf.jpg" alt="PHP反序列化之POP链学习 - MRCTF2020-Ezpop"></a></figure><div class="media-content"><p class="date"><time dateTime="2025-02-08T14:57:00.000Z">02-08-2025</time></p><p class="title"><a href="/2025/02/08/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B9%8BPOP%E9%93%BE%E5%AD%A6%E4%B9%A0-MRCTF2020-Ezpop/">PHP反序列化之POP链学习 - MRCTF2020-Ezpop</a></p><p class="categories"><a href="/categories/%E5%AE%89%E5%85%A8/">安全</a> / <a href="/categories/%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/">Web安全</a> / <a href="/categories/%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/PHP/">PHP</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/"><img src="/statics/images/post-covers/coding.jpeg" alt="A Comprehensive Comparison Between Virtual Hosts and Subdomains"></a></figure><div class="media-content"><p class="date"><time dateTime="2024-08-09T01:22:50.000Z">08-09-2024</time></p><p class="title"><a href="/2024/08/09/A-Comprehensive-Comparison-Between-Virtual-Hosts-and-Subdomains/">A Comprehensive Comparison Between Virtual Hosts and Subdomains</a></p><p class="categories"><a href="/categories/%E5%AE%89%E5%85%A8/">安全</a> / <a href="/categories/%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/">Web安全</a> / <a href="/categories/%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2022/04/27/Implementing-Kubernetes-and-Docker-on-OCI/"><img src="/statics/images/post-covers/k8s-docker.jpg" alt="Implementing Kubernetes and Docker on OCI"></a></figure><div class="media-content"><p class="date"><time dateTime="2022-04-27T02:34:37.000Z">04-27-2022</time></p><p class="title"><a href="/2022/04/27/Implementing-Kubernetes-and-Docker-on-OCI/">Implementing Kubernetes and Docker on OCI</a></p><p class="categories"><a href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2021/08/21/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/"><img src="/statics/images/post-covers/port-scan.jpg" alt="端口扫描"></a></figure><div class="media-content"><p class="date"><time dateTime="2021-08-21T02:15:00.000Z">08-21-2021</time></p><p class="title"><a href="/2021/08/21/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/">端口扫描</a></p><p class="categories"><a href="/categories/%E5%AE%89%E5%85%A8/">安全</a> / <a href="/categories/%E5%AE%89%E5%85%A8/%E4%B8%BB%E6%9C%BA%E5%AE%89%E5%85%A8/">主机安全</a> / <a href="/categories/%E5%AE%89%E5%85%A8/%E4%B8%BB%E6%9C%BA%E5%AE%89%E5%85%A8/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2025/02/"><span class="level-start"><span class="level-item">二月 2025</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/08/"><span class="level-start"><span class="level-item">八月 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">八月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Kubernetes/"><span class="tag">Kubernetes</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Nmap/"><span class="tag">Nmap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NodePort/"><span class="tag">NodePort</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/OCI/"><span class="tag">OCI</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/POP%E9%93%BE/"><span class="tag">POP链</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"><span class="tag">信息收集</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><span class="tag">反序列化</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/"><span class="tag">子域名</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BE%A1%E5%89%91/"><span class="tag">御剑</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/"><span class="tag">虚拟主机</span><span class="tag">1</span></a></div></div></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Virtual-Hosts"><span class="level-left"><span class="level-item">1</span><span class="level-item">Virtual Hosts</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Types"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">Types</span></span></a></li><li><a class="level is-mobile" href="#DNS-Resolution"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">DNS Resolution</span></span></a></li><li><a class="level is-mobile" href="#Potential-Security-Concerns"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">Potential Security Concerns</span></span></a></li><li><a class="level is-mobile" href="#Virtual-Host-Enumeration"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">Virtual Host Enumeration</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Subdomains"><span class="level-left"><span class="level-item">2</span><span class="level-item">Subdomains</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#DNS-Resolution-1"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">DNS Resolution</span></span></a></li><li><a class="level is-mobile" href="#Potential-Security-Concerns-1"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">Potential Security Concerns</span></span></a></li><li><a class="level is-mobile" href="#Subdomain-Enumerations"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">Subdomain Enumerations</span></span></a></li></ul></li><li><a class="level is-mobile" href="#Conclusion"><span class="level-left"><span class="level-item">3</span><span class="level-item">Conclusion</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">WuDiaries</a><p class="is-size-7"><span>&copy; 2025 Qingyun Wu</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019 - 2025 by Qingyun Wu</p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
